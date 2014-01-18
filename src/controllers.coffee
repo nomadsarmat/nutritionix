@@ -60,7 +60,7 @@ class NavCtrl
 
 class HomeCtrl
     constructor: (@$scope, @syncData) ->
-        @syncData('syncedValue').$bind(@$scope, 'syncedValue')
+        #@syncData('syncedValue').$bind(@$scope, 'syncedValue')
 
         return
 

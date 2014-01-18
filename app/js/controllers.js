@@ -82,7 +82,6 @@
     function HomeCtrl($scope, syncData) {
       this.$scope = $scope;
       this.syncData = syncData;
-      this.syncData('syncedValue').$bind(this.$scope, 'syncedValue');
       return;
     }
 
