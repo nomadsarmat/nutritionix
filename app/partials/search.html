@@ -22,12 +22,14 @@
         <div class='col-lg-4'>
             <div class='list-group'>
                 <h3>Results</h3>
-                <a class='list-group-item'
-                    ng-repeat="hit in hits"
-                    ng-class="{active:hit.active}"
-                    ng-click="getItemDetails(hit)">
-                    {{hit.fields.item_name}}
-                </a>
+                <div class="results-list">
+                    <a class='list-group-item'
+                        ng-repeat="hit in hits"
+                        ng-class="{active:hit.active}"
+                        ng-click="getItemDetails(hit)">
+                        {{hit.fields.item_name}}
+                    </a>
+                </div>
             </div>
         </div>
 

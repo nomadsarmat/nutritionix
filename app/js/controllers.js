@@ -152,7 +152,7 @@
         appKey: this.appKey,
         appId: this.appId,
         fields: "item_name,brand_name,item_id,brand_id",
-        results: "0:5"
+        results: "0:20"
       };
       this.$http.get(url, {
         params: params

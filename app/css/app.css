@@ -2,3 +2,7 @@
 body {
     background-color: aliceblue;
 }
+.results-list {
+    height: 500px;
+    overflow: auto;
+}

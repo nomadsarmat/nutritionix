@@ -78,7 +78,6 @@ class SearchCtrl
 
         syncData(['macroCount'])
             .$bind(@$scope, 'macroCount').then =>
-                #macroCounts.$bind(@$scope, 'macroCount').then =>
                 return unless @$scope.macroCount is ''
                 @$scope.macroCount =
                     calories : 0
@@ -110,7 +109,7 @@ class SearchCtrl
             @appKey
             @appId
             fields:"item_name,brand_name,item_id,brand_id"
-            results:"0:5"
+            results:"0:20"
         }
 
         @$http.get(url, {params}).success (data) =>
@@ -127,10 +126,10 @@ class SearchCtrl
         return
 
     addFood: =>
-        @$scope.macroCount.calories += @$scope.item.nutrition.calories;
-        @$scope.macroCount.protein  += @$scope.item.nutrition.protein;
-        @$scope.macroCount.carbs    += @$scope.item.nutrition.carbs;
-        @$scope.macroCount.fat      += @$scope.item.nutrition.fat;
+        @$scope.macroCount.calories += @$scope.item.nutrition.calories
+        @$scope.macroCount.protein  += @$scope.item.nutrition.protein
+        @$scope.macroCount.carbs    += @$scope.item.nutrition.carbs
+        @$scope.macroCount.fat      += @$scope.item.nutrition.fat
 
         @currentFood.$add object: @$scope.item
 
