@@ -2,8 +2,10 @@ module.exports = (grunt) ->
     grunt.initConfig
         watch:
             coffee:
+                options:
+                    interrupt: true
                 files: [
-                    'src/**/*.js.coffee'
+                    'src/**/*.coffee'
                 ]
                 tasks: ['coffee:main']
         karma:
