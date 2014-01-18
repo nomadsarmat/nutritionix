@@ -3,9 +3,9 @@ app = angular.module 'ntx', [
     'ntx.config'
     'ntx.routes'
     'ntx.filters'
-    'ntx.services'
-    'ntx.directives'
     'ntx.controllers'
+    'ntx.service.login'
+    'ntx.service.firebase'
     'waitForAuth'
     'routeSecurity'
 ]

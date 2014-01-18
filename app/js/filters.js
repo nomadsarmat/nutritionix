@@ -1,30 +1,39 @@
-'use strict';
+(function() {
+  var interpolateFilter, reverseFilter;
 
-/* Filters */
+  interpolateFilter = function(version) {
+    return function(text) {
+      return String(text).replace(/\%VERSION\%/mg, version);
+    };
+  };
 
-angular.module('ntx.filters', [])
-   .filter('interpolate', ['version', function(version) {
-      return function(text) {
-         return String(text).replace(/\%VERSION\%/mg, version);
-      }
-   }])
-
-   .filter('reverse', function() {
-      function toArray(list) {
-         var k, out = [];
-         if( list ) {
-            if( angular.isArray(list) ) {
-               out = list;
+  reverseFilter = function() {
+    var toArray;
+    toArray = function(list) {
+      var k, key, out;
+      k = [];
+      out = [];
+      if (list != null) {
+        if (angular.isArray(list)) {
+          out = list;
+        } else if (angular.isObject(list)) {
+          out = (function() {
+            var _results;
+            _results = [];
+            for (key in list) {
+              _results.push(key);
             }
-            else if( typeof(list) === 'object' ) {
-               for (k in list) {
-                  if (list.hasOwnProperty(k)) { out.push(list[k]); }
-               }
-            }
-         }
-         return out;
+            return _results;
+          })();
+        }
       }
-      return function(items) {
-         return toArray(items).slice().reverse();
-      };
-   });
+      return out;
+    };
+    return function(items) {
+      return toArray(items).slice().reverse();
+    };
+  };
+
+  angular.module('ntx.filters', []).filter('interpolate', ['version', interpolateFilter]).filter('reverse', reverseFilter);
+
+}).call(this);

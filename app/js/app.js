@@ -1,7 +1,7 @@
 (function() {
   var app, firebaseStartup;
 
-  app = angular.module('ntx', ['ntx.config', 'ntx.routes', 'ntx.filters', 'ntx.services', 'ntx.directives', 'ntx.controllers', 'waitForAuth', 'routeSecurity']);
+  app = angular.module('ntx', ['ntx.config', 'ntx.routes', 'ntx.filters', 'ntx.controllers', 'ntx.service.login', 'ntx.service.firebase', 'waitForAuth', 'routeSecurity']);
 
   firebaseStartup = function(loginService, $rootScope, FBURL) {
     if (FBURL === 'https://INSTANCE.firebaseio.com') {
