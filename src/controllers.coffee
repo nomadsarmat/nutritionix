@@ -73,16 +73,19 @@ class MacroLabelCtrl
         return
 
 class SearchCtrl
-    constructor: (@$scope, @$http, syncData, $firebase,
-        firebaseRef, @appId, @appKey, @nutritionixBase) ->
-        macroCounts = $firebase firebaseRef 'macroCount'
+    constructor: (@$scope, @$http, syncData, @appId, @appKey,
+        @nutritionixBase) ->
 
-        macroCounts.$bind(@$scope, 'macroCount').then =>
-            @$scope.macroCount =
-                calories : 0
-                fat      : 0
-                carbs    : 0
-                protein  : 0
+        syncData(['macroCount'])
+            .$bind(@$scope, 'macroCount').then =>
+                #macroCounts.$bind(@$scope, 'macroCount').then =>
+                return unless @$scope.macroCount is ''
+                @$scope.macroCount =
+                    calories : 0
+                    fat      : 0
+                    carbs    : 0
+                    protein  : 0
+                return
 
         @$scope.searchName = null
 
@@ -291,8 +294,6 @@ angular.module('myApp.controllers', [])
         '$scope'
         '$http'
         'syncData'
-        '$firebase'
-        'firebaseRef'
         'appId'
         'appKey'
         'nutritionixBase'

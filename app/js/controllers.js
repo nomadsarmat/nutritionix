@@ -108,9 +108,8 @@
   })();
 
   SearchCtrl = (function() {
-    function SearchCtrl($scope, $http, syncData, $firebase, firebaseRef, appId, appKey, nutritionixBase) {
-      var macroCounts,
-        _this = this;
+    function SearchCtrl($scope, $http, syncData, appId, appKey, nutritionixBase) {
+      var _this = this;
       this.$scope = $scope;
       this.$http = $http;
       this.appId = appId;
@@ -120,9 +119,11 @@
       this.addFood = __bind(this.addFood, this);
       this.clearActive = __bind(this.clearActive, this);
       this.searchForData = __bind(this.searchForData, this);
-      macroCounts = $firebase(firebaseRef('macroCount'));
-      macroCounts.$bind(this.$scope, 'macroCount').then(function() {
-        return _this.$scope.macroCount = {
+      syncData(['macroCount']).$bind(this.$scope, 'macroCount').then(function() {
+        if (_this.$scope.macroCount !== '') {
+          return;
+        }
+        _this.$scope.macroCount = {
           calories: 0,
           fat: 0,
           carbs: 0,
@@ -358,6 +359,6 @@
 
   })();
 
-  angular.module('myApp.controllers', []).controller('NavCtrl', ['$scope', '$location', NavCtrl]).controller('HomeCtrl', ['$scope', 'syncData', HomeCtrl]).controller('MacroLabelCtrl', ['$scope', 'syncData', '$firebase', 'firebaseRef', MacroLabelCtrl]).controller('SearchCtrl', ['$scope', '$http', 'syncData', '$firebase', 'firebaseRef', 'appId', 'appKey', 'nutritionixBase', SearchCtrl]).controller('LoginCtrl', ['$scope', 'loginService', '$location', LoginCtrl]).controller('AccountCtrl', ['$scope', 'loginService', 'syncData', '$location', AccountCtrl]);
+  angular.module('myApp.controllers', []).controller('NavCtrl', ['$scope', '$location', NavCtrl]).controller('HomeCtrl', ['$scope', 'syncData', HomeCtrl]).controller('MacroLabelCtrl', ['$scope', 'syncData', '$firebase', 'firebaseRef', MacroLabelCtrl]).controller('SearchCtrl', ['$scope', '$http', 'syncData', 'appId', 'appKey', 'nutritionixBase', SearchCtrl]).controller('LoginCtrl', ['$scope', 'loginService', '$location', LoginCtrl]).controller('AccountCtrl', ['$scope', 'loginService', 'syncData', '$location', AccountCtrl]);
 
 }).call(this);
