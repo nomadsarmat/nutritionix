@@ -1,8 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp',
-      ['myApp.config', 'myApp.routes', 'myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers',
+angular.module('ntx',
+      ['ntx.config', 'ntx.routes', 'ntx.filters', 'ntx.services', 'ntx.directives', 'ntx.controllers',
          'waitForAuth', 'routeSecurity']
    )
 
