@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body ng-cloak-auth class="hide">
+    <div class='container'>
+        <div ng-controller='NavCtrl'>
+            <ul class="nav nav-pills pull-right">
+                <li ng-repeat="location in locations"
+                    ng-class='{active:location.active}'
+                    ng-show-auth="location.auth">
+                    <a href="{{location.path}}" ng-click="nav(location)">
+                        {{location.title}}
+                    </a>
+                </li>
+            </ul>
+            <div class='page-header'>
+                <h2>{{settings.pageTitle}}</h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='column-lg-12' ng-view></div>
+        </div>
+        <div class='row' ng-controller="MacroLabelCtrl">
+            <div class='column-lg-6 pull-right'>
+                <span class="label label-default">
+                    Calories: {{counts.calories | number:1}}
+                </span>
+                <span class="label label-default">
+                    Protein: {{counts.protein | number:1}}
+                </span>
+                <span class="label label-default">
+                    Carbs: {{counts.carbs | number:1}}
+                </span>
+                <span class="label label-default">
+                    Fat: {{counts.fat | number:1}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+
+  <script src="js/jquery-1.10.2.min.js"></script>
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/service.login.js"></script>
+  <script src="js/service.firebase.js"></script>
+  <script src="js/module.waitForAuth.js"></script>
+  <script src="js/module.routeSecurity.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-lg-4'>
+            <div class="input-group">
+                <input
+                    placeholder="Name..."
+                    ng-model="searchName"
+                    type="text"
+                    ng-keyup="$event.keyCode == 13?searchForData():null"
+                    class="form-control">
+                <span class="input-group-btn">
+                    <button
+                        class="btn btn-default"
+                        ng-click="searchForData()"
+                        type="submit">Search</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='col-lg-4'>
+            <div class='list-group'>
+                <h3>Results</h3>
+                <a class='list-group-item'
+                    ng-repeat="hit in hits"
+                    ng-class="{active:hit.active}"
+                    ng-click="getItemDetails(hit)">
+                    {{hit.fields.item_name}}
+                </a>
+            </div>
+        </div>
+
+        <div class='col-lg-4' ng-show="item != null">
+            <h3>Details
+            <button
+                type="button"
+                ng-click="addFood()"
+                class="btn btn-default btn pull-right">
+                Add <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+            </h3>
+            <ul class='list-group'>
+                <li class='list-group-item'><b>Name:</b> {{item.name}}</li>
+                <li class='list-group-item'><b>Brand:</b> {{item.brand}}</li>
+                <li class='list-group-item'>
+                    <b>Calories:</b> {{item.nutrition.calories | number:1}}</li>
+                <li class='list-group-item'>
+                    <b>Fat:</b> {{item.nutrition.fat | number:1}}g</li>
+                <li class='list-group-item'>
+                    <b>Carbs:</b> {{item.nutrition.carbs | number:1}}g</li>
+                <li class='list-group-item'>
+                    <b>Protein:</b> {{item.nutrition.protein | number:1}}g</li>
+            </ul>
+        </div>
+    </div>
+</div>
