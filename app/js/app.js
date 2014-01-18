@@ -1,22 +1,20 @@
-'use strict';
+(function() {
+  var app, firebaseStartup;
 
-// Declare app level module which depends on filters, and services
-angular.module('ntx',
-      ['ntx.config', 'ntx.routes', 'ntx.filters', 'ntx.services', 'ntx.directives', 'ntx.controllers',
-         'waitForAuth', 'routeSecurity']
-   )
+  app = angular.module('ntx', ['ntx.config', 'ntx.routes', 'ntx.filters', 'ntx.services', 'ntx.directives', 'ntx.controllers', 'waitForAuth', 'routeSecurity']);
 
-   .run(['loginService', '$rootScope', 'FBURL', function(loginService, $rootScope, FBURL) {
-      if( FBURL === 'https://INSTANCE.firebaseio.com' ) {
-         // double-check that the app has been configured
-         angular.element(document.body).html('<h1>Please configure app/js/config.js before running!</h1>');
-         setTimeout(function() {
-            angular.element(document.body).removeClass('hide');
-         }, 250);
-      }
-      else {
-         // establish authentication
-         $rootScope.auth = loginService.init('/login');
-         $rootScope.FBURL = FBURL;
-      }
-   }]);
+  firebaseStartup = function(loginService, $rootScope, FBURL) {
+    if (FBURL === 'https://INSTANCE.firebaseio.com') {
+      angular.element(document.body).html('<h1>Please configure app/js/config.js before running!</h1>');
+      setTimeout((function() {
+        return angular.element(document.body).removeClass('hide');
+      }), 250);
+    } else {
+      $rootScope.auth = loginService.init('/login');
+      $rootScope.FBURL = FBURL;
+    }
+  };
+
+  app.run(['loginService', '$rootScope', 'FBURL', firebaseStartup]);
+
+}).call(this);
