@@ -5,4 +5,12 @@ Uses:
 
 *  Firebase
 *  Angular
-*  More?
+*  Grunt
+*  Coffee-Script
+
+## Installation ##
+
+*  `npm install`
+*  `grunt && grunt watch`
+*  `./scripts/web-server.js`
+*  Figure out how to make your own config.js, you can't have mine

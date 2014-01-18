@@ -220,3 +220,4 @@ test_out/unit.xml
 test_out/e2e.xmlconfig.js
 config.js
 node_modules
+app/js/
