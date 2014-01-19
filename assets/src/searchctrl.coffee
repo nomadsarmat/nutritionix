@@ -1,6 +1,5 @@
 class SearchCtrl
-    constructor: (@$scope, @$http, syncData, @appId, @appKey,
-        @nutritionixBase) ->
+    constructor: (@$scope, syncData, @nutritionix) ->
 
         syncData(['macroCount'])
             .$bind(@$scope, 'macroCount').then =>
@@ -30,20 +29,13 @@ class SearchCtrl
     searchForData: =>
         return unless @$scope.searchName?
 
-        url = "#{@nutritionixBase}search/#{@$scope.searchName}"
-        params = {
-            @appKey
-            @appId
-            fields:"item_name,brand_name,item_id,brand_id"
-            results:"0:20"
-        }
-
-        @$http.get(url, {params}).success (data) =>
-            @$scope.searchResult = data
-            @$scope.hits = data.hits
-            for hit in data.hits
-                hit.active = false
-            return
+        @nutritionix.searchForTerm(@$scope.searchName)
+            .success (data) =>
+                @$scope.searchResult = data
+                @$scope.hits = data.hits
+                for hit in data.hits
+                    hit.active = false
+                return
         return
 
     clearActive: =>
@@ -66,18 +58,9 @@ class SearchCtrl
         return
 
     getItemDetails: (item) =>
-        id = item._id
         @clearActive()
         item.active = true
-        url = "#{@nutritionixBase}item/"
-
-        params = {
-            @appKey
-            @appId
-            id
-        }
-
-        @$http.get(url, {params}).success (data) =>
+        @nutritionix.getItem(item._id).success (data) =>
             @$scope.item =
                 name: data.item_name
                 brand: data.brand_name
@@ -91,13 +74,15 @@ class SearchCtrl
 
         return
 
-angular.module('ntx.Search', ['ntx.service.firebase', 'ntx.config'])
-    .controller('SearchCtrl', [
+module = angular.module 'ntx.Search', [
+    'ntx.service.firebase'
+    'ntx.config'
+    'ntx.NutritionixAPI'
+]
+
+module.controller('SearchCtrl', [
         '$scope'
-        '$http'
         'syncData'
-        'appId'
-        'appKey'
-        'nutritionixBase'
+        'nutritionixAPI'
         SearchCtrl
     ])
