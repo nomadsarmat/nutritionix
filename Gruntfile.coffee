@@ -8,6 +8,13 @@ module.exports = (grunt) ->
                     'assets/src/**/*.coffee'
                 ]
                 tasks: ['coffee:main']
+            tests:
+                options:
+                    interrupt: true
+                files: [
+                    'test/src/**/*.coffee'
+                ]
+                tasks: ['coffee:test']
         karma:
             watch:
                 configFile: 'config/karma.conf.js'
@@ -22,6 +29,13 @@ module.exports = (grunt) ->
                 flatten: false
                 src: ['**/*.coffee']
                 dest: 'assets/js/'
+                ext: '.js'
+            test:
+                expand: true
+                cwd: 'test/src'
+                flatten: false
+                src: ['**/*.coffee']
+                dest: 'test/unit/'
                 ext: '.js'
             options:
                 sourceMap: true
@@ -52,7 +66,7 @@ module.exports = (grunt) ->
 
     # register the task
     grunt.loadNpmTasks 'grunt-contrib-watch'
-    #grunt.loadNpmTasks 'grunt-karma'
+    grunt.loadNpmTasks 'grunt-karma'
     #grunt.loadNpmTasks 'grunt-docco'
     grunt.loadNpmTasks 'grunt-contrib-coffee'
 

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "searchctrlSpec.js",
+  "sourceRoot": "../src/",
+  "sources": [
+    "searchctrlSpec.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,CAAA,CAAiC,KAAjC,CAAiC,aAAjC;CACI,GAAA,EAAA,MAAA;CAAA,CAE+B,CAAb,CAAlB,EAAW,GAAQ,CAAnB,CAAkB;CACd,EAAU,CAAT,EAAD,IAAoB;CACnB,CAAuC,CAA1B,CAAb,MAAD,CAAc,CAAA,CAAd;CAAwC,CAAC,EAAC,EAAF,EAAE;CAF5B,OAEA;CAFP,IAAO;CAIf,CAAH,CAAkC,MAAA,EAAlC,kBAAA;CACW,EAAyB,CAAxB,EAAR,CAAA,CAAgC,KAAhC;CADJ,IAAkC;CAPtC,EAAiC;CAAjC"
+}

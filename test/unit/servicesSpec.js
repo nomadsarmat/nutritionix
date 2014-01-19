@@ -3,7 +3,8 @@
 /* jasmine specs for services go here */
 
 describe('service', function() {
-   beforeEach(module('myApp.services'));
+   beforeEach(module('ntx.service.login'));
+   beforeEach(module('ntx.service.firebase'));
 
    describe('loginService', function() {
       beforeEach(module(function($provide) {

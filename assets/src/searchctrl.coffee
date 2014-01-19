@@ -1,14 +1,9 @@
 class SearchCtrl
     constructor: (@$scope, syncData, @nutritionix) ->
-
         syncData(['macroCount'])
             .$bind(@$scope, 'macroCount').then =>
                 return unless @$scope.macroCount is ''
-                @$scope.macroCount =
-                    calories : 0
-                    fat      : 0
-                    carbs    : 0
-                    protein  : 0
+                @resetMacros()
                 return
 
         @$scope.searchName = null
@@ -19,10 +14,19 @@ class SearchCtrl
 
         return
 
+    resetMacros: =>
+        @$scope.macroCount =
+            calories : 0
+            fat      : 0
+            carbs    : 0
+            protein  : 0
+        return
+
     getInstance: ->
-        @$scope.addFood = @addFood
+        @$scope.addFood        = @addFood
         @$scope.getItemDetails = @getItemDetails
-        @$scope.searchForData = @searchForData
+        @$scope.searchForData  = @searchForData
+        @$scope.resetMacros    = @resetMacros
 
         return
 
@@ -44,10 +48,12 @@ class SearchCtrl
         return
 
     addFood: =>
-        @$scope.macroCount.calories += @$scope.item.nutrition.calories
-        @$scope.macroCount.protein  += @$scope.item.nutrition.protein
-        @$scope.macroCount.carbs    += @$scope.item.nutrition.carbs
-        @$scope.macroCount.fat      += @$scope.item.nutrition.fat
+        item = @$scope.item
+        nutrition = item.nutrition
+        @$scope.macroCount.calories += item.quantity * nutrition.calories
+        @$scope.macroCount.protein  += item.quantity * nutrition.protein
+        @$scope.macroCount.carbs    += item.quantity * nutrition.carbs
+        @$scope.macroCount.fat      += item.quantity * nutrition.fat
 
         @currentFood.$add object: @$scope.item
 
@@ -65,6 +71,7 @@ class SearchCtrl
                 name: data.item_name
                 brand: data.brand_name
                 id: data.item_id
+                quantity: 1
                 nutrition:
                     calories: data.nf_calories
                     fat: data.nf_total_fat

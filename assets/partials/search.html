@@ -15,6 +15,7 @@
                         type="submit">Search</button>
                 </span>
             </div>
+            <button class='btn btn-default' ng-click="resetMacros()">Reset</button>
         </div>
     </div>
 
@@ -27,7 +28,8 @@
                         ng-repeat="hit in hits"
                         ng-class="{active:hit.active}"
                         ng-click="getItemDetails(hit)">
-                        {{hit.fields.item_name}}
+                        <h5>{{hit.fields.item_name}}</h5>
+                        <em>{{hit.fields.brand_name}}</em>
                     </a>
                 </div>
             </div>
@@ -35,25 +37,32 @@
 
         <div class='col-lg-4' ng-show="item != null">
             <h3>Details
-            <button
-                type="button"
-                ng-click="addFood()"
-                class="btn btn-default btn pull-right">
-                Add <span class="glyphicon glyphicon-plus-sign"></span>
-            </button>
             </h3>
             <ul class='list-group'>
                 <li class='list-group-item'><b>Name:</b> {{item.name}}</li>
                 <li class='list-group-item'><b>Brand:</b> {{item.brand}}</li>
                 <li class='list-group-item'>
-                    <b>Calories:</b> {{item.nutrition.calories | number:1}}</li>
+                    <b>Calories:</b> {{item.nutrition.calories * item.quantity| number:1}}</li>
                 <li class='list-group-item'>
-                    <b>Fat:</b> {{item.nutrition.fat | number:1}}g</li>
+                    <b>Fat:</b> {{item.nutrition.fat  * item.quantity| number:1}}g</li>
                 <li class='list-group-item'>
-                    <b>Carbs:</b> {{item.nutrition.carbs | number:1}}g</li>
+                    <b>Carbs:</b> {{item.nutrition.carbs  * item.quantity| number:1}}g</li>
                 <li class='list-group-item'>
-                    <b>Protein:</b> {{item.nutrition.protein | number:1}}g</li>
+                    <b>Protein:</b> {{item.nutrition.protein  * item.quantity| number:1}}g</li>
             </ul>
+            <div class="input-group">
+                <span class="input-group-addon">Qty</span>
+                <input type="text"
+                    class="form-control"
+                    ng-model="item.quantity">
+                <span class="input-group-btn">
+                <button
+                    class="btn btn-default"
+                    ng-click="addFood()"
+                    type="button">Add
+                </button>
+                </span>
+            </div>
         </div>
     </div>
 </div>
