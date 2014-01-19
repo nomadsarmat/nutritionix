@@ -5,7 +5,7 @@ module.exports = (grunt) ->
                 options:
                     interrupt: true
                 files: [
-                    'src/**/*.coffee'
+                    'assets/src/**/*.coffee'
                 ]
                 tasks: ['coffee:main']
         karma:
@@ -18,11 +18,13 @@ module.exports = (grunt) ->
         coffee:
             main:
                 expand: true
+                cwd: 'assets/src/'
                 flatten: false
-                cwd: 'src'
                 src: ['**/*.coffee']
-                dest: 'app/js'
+                dest: 'assets/js/'
                 ext: '.js'
+            options:
+                sourceMap: true
 
         #exec:
         #    frontend_sdk_docs:

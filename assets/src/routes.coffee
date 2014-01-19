@@ -1,19 +1,19 @@
 router = ($routeProvider) ->
     $routeProvider.when '/home',
-        templateUrl: 'partials/home.html'
+        templateUrl: '/assets/partials/home.html'
         controller: 'HomeCtrl'
 
     $routeProvider.when '/search',
-        templateUrl: 'partials/search.html'
+        templateUrl: '/assets/partials/search.html'
         controller: 'SearchCtrl'
 
     $routeProvider.when '/account',
         authRequired: true, # must authenticate before viewing this page
-        templateUrl: 'partials/account.html',
+        templateUrl: '/assets/partials/account.html',
         controller: 'AccountCtrl'
 
     $routeProvider.when '/login',
-        templateUrl: 'partials/login.html'
+        templateUrl: '/assets/partials/login.html'
         controller: 'LoginCtrl'
 
     $routeProvider.otherwise redirectTo: '/home'
