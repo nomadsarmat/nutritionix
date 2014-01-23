@@ -7,10 +7,17 @@ class SearchCtrl
                 return
 
         @$scope.searchName = null
-
         @currentFood = syncData 'myfood', 10
 
         @getInstance()
+
+        return
+
+    getInstance: ->
+        @$scope.addFood        = @addFood
+        @$scope.getItemDetails = @getItemDetails
+        @$scope.searchForData  = @searchForData
+        @$scope.resetMacros    = @resetMacros
 
         return
 
@@ -22,26 +29,22 @@ class SearchCtrl
             protein  : 0
         return
 
-    getInstance: ->
-        @$scope.addFood        = @addFood
-        @$scope.getItemDetails = @getItemDetails
-        @$scope.searchForData  = @searchForData
-        @$scope.resetMacros    = @resetMacros
-
-        return
-
     searchForData: =>
         return unless @$scope.searchName?
+        return if @$scope.searchName is ''
 
         @nutritionix.searchForTerm(@$scope.searchName)
-            .success (data) =>
-                @$scope.searchResult = data
-                @$scope.hits = data.hits
-                for hit in data.hits
-                    hit.active = false
-                return
+            .success(@saveReturnedData)
         return
 
+    saveReturnedData: (data) =>
+        @$scope.searchResult = data
+        @$scope.hits = data.hits
+        for hit in data.hits
+            hit.active = false
+        return
+
+    # @private
     clearActive: =>
         hit.active = false for hit in @$scope.hits
 

@@ -7,7 +7,7 @@ module.exports = (grunt) ->
                 files: [
                     'assets/src/**/*.coffee'
                 ]
-                tasks: ['coffee:main']
+                tasks: ['coffee:main', 'karma:watch:run']
             karma:
                 files: [
                     'test/src/**/*.coffee'
