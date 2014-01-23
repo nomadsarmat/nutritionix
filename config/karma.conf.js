@@ -10,13 +10,11 @@ module.exports = function(config){
          'test/lib/firebase/firebase-simple-login.js',
          'test/lib/firebase/angularfire.js',
          'test/lib/angular/angular-mocks.js',
-         'assets/js/**/*.js',
          'assets/lib/**/*.js',
          'assets/config/config.js',
+         'assets/js/**/*.js',
          'test/unit/**/*.js'
       ],
-
-      autoWatch : true,
 
       frameworks: ['jasmine'],
 

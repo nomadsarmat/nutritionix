@@ -8,16 +8,17 @@ module.exports = (grunt) ->
                     'assets/src/**/*.coffee'
                 ]
                 tasks: ['coffee:main']
-            tests:
-                options:
-                    interrupt: true
+            karma:
                 files: [
                     'test/src/**/*.coffee'
+                    'assets/src/**/*.coffee'
+
                 ]
-                tasks: ['coffee:test']
+                tasks: ['coffee:test', 'karma:watch:run']
         karma:
             watch:
                 configFile: 'config/karma.conf.js'
+                background: true
             jenkins:
                 configFile: 'config/jenkins.karma.conf.js'
             coverage:
